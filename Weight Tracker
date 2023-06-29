@@ -1,0 +1,21 @@
+from pywebio.input import *
+from pywebio.output import *
+from pywebio import start_server
+def calculate_bmi():
+   height = input("Enter your height (in cm)", type=FLOAT)
+   weight = input("Enter your weight (in kg)", type=FLOAT)
+   bmi = weight / ((height/100) ** 2)
+   bmi = round(bmi, 2)
+   weight_category = ""
+   if bmi < 18.5:
+      weight_category = "underweight"
+   elif 18.5 <= bmi <= 24.9:
+      weight_category = "normal weight"
+   elif 25 <= bmi <= 29.9:
+      weight_category = "overweight"
+   else:
+      weight_category = "obese"
+   put_text("Your BMI is: %s" % bmi)
+   put_text("You have a %s" % weight_category)
+   if __name__ == '__main__':
+      start_server(calculate_bmi, port=80, debug=True, title="BMI Calculator", button_text="Calculate BMI")
